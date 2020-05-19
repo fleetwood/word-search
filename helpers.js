@@ -41,6 +41,9 @@ const helpers = () => {
       routes.map(route => results += button(route));
       return results;
     }
+    , stringify: (obj) => {
+      return JSON.stringify(obj);
+    }
   }
 }
 

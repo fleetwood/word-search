@@ -8,7 +8,7 @@
     <div class="card-body">
         <div class="collapse show" id="{{listId}}">
             {{#each words as | word |}}
-            <div class="words" data-word="{{word.word}}" data-value="{{word.value}}">
+            <div class="words" data-word="{{word.word}}" data-value="{{word.value}}" data-values="{{stringify word.values}}">
                 <span class="letters">
                     {{ word.word }} | 
                     <span class="{{pillBadge word.value}} badge-pill">{{word.value}}</span>

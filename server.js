@@ -42,37 +42,66 @@ app.use(express.static(path.resolve(__dirname, 'data'))) // serve json files
 const mapTerm = () => {
   let word = terms.search.toUpperCase();
   let current = word.split('').sort();
+  if (_.contains(current, '?')) {
+    // move ? to the end
+    let c = current.shift();
+    current.push(c);
+  }
   let count = _.countBy(current, a => a);
   return { word, count };
 };
 
+const compareWords = (dict, search) => {
+  let found = true;
+  let varNum = search.count['?'] || 0;
+  let variable = varNum;
+  Object.keys(dict.count).every(o => {
+    let numInEntry = dict.count[o]
+      , numInSearch = search.count[o] || 0
+      , diff = numInSearch - numInEntry;
+    // console.log(`\t${o} : ${numInEntry} in ${dict.word}, ${numInSearch} in ${search.word} = ${diff} (${variable} available)`)
+    if (diff < 0) {
+      diff *= (-1);
+      // console.log(`\tNot found, ${variable} available, ${diff} needed`);
+      variable -= diff;
+      if (variable < 0) {
+        // console.log(`\tNope on ${dict.word}. ${variable} available...`);
+        found = false;
+        return found;
+      }
+    }
+    return found;
+  });
+  // console.log(search.word,found ? 'Adding' : 'Ignoring', dict.word)
+  variable = varNum;
+  return found;
+}
+
 const filterByLetterCount = (results) => {
   let search = mapTerm();
   let start = results.length;
-  results = results.filter(w => {
-    let found = true;
-    // console.log(`${w.word} ? ${search.word}`);
-    Object.keys(w.count).every(o => {
-      let wc = w.count[o]
-        , sc = search.count[o] || null;
-      let r = sc !== null && sc >= wc;
-      // console.log(`\t${o} : ${wc} <= ${sc} = ${r}`)
-      if (!r) {
-        found = false;
-      }
-      return found;
-    });
-    return found;
-  });
+  results = results.filter(dict => compareWords(dict, search));
   console.log(`Found ${results.length} matches of ${start} words searched`);
   return results;
 }
 
 const getValues = (results) => {
-  results.forEach(r => {
-    r.value = 0;
-    r.word.split('').forEach(l => {
-      r.value += values[l];
+  results.forEach(dict => {
+    dict.value = 0;
+    dict.values = [];
+    let search = mapTerm();
+    let dictLetters = dict.word.split('');
+    dictLetters.forEach(letter => {
+      let index = search.word.indexOf(letter);
+      let value = values[letter];
+      if (index > -1) {
+        search.word = search.word.slice(0, index) + search.word.slice(index + 1);
+        dict.values.push({ letter, value });
+        dict.value += value;
+      }
+      else {
+        dict.values.push({ letter, value: '?' });
+      }
     });
   });
   return results;
@@ -89,6 +118,8 @@ const getWords = () => {
   results = results.filter(w => w.value >= terms.points);
 
   results = filterByLetterCount(results);
+
+  //TODO: filter for exact matches: "AB"
 
   results = getValues(results);
 
