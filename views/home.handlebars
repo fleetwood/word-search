@@ -23,11 +23,10 @@
         <label for="length">Min points</label>
         <select class="form-control" onchange="this.form.submit()" id="points" name="points">
           <option {{select 0 terms.points}}>0</option>
+          <option {{select 5 terms.points}}>5</option>
           <option {{select 10 terms.points}}>10</option>
+          <option {{select 15 terms.points}}>15</option>
           <option {{select 20 terms.points}}>20</option>
-          <option {{select 30 terms.points}}>30</option>
-          <option {{select 40 terms.points}}>40</option>
-          <option {{select 50 terms.points}}>50</option>
         </select>
       </div>
     </div>
@@ -37,19 +36,14 @@
 <div class="bs-docs-section">
   <div class="row">
     <div class="col-lg-12">
-      <h2>Words</h2>
+      <h3>Words {{ total total }}</h3>
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-12">
-      <ul class="list-group">
-        {{#each words as | word |}}
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          {{word.word}}
-          <span class="badge {{pillBadge word.value}} badge-pill">{{word.value}}</span>
-        </li>
+    <div class="col-lg-12 list-group">
+        {{#each words as |list|}}
+          {{> words-list list }}
         {{/each}}
-      </ul>
     </div>
   </div>
 </div>

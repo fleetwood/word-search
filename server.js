@@ -92,6 +92,16 @@ const filterByLetterCount = (results) => {
   return results;
 }
 
+const getValues = (results) => {
+  results.forEach(r => {
+    r.value = 0;
+    r.word.split('').forEach(l => {
+      r.value += values[l];
+    });
+  });
+  return results;
+}
+
 const getWords = () => {
   let length = terms.search.length;
 
@@ -104,27 +114,20 @@ const getWords = () => {
 
   results = filterByLetterCount(results);
 
-  // results = _.sample(results, _.random(5, 50));
+  results = getValues(results);
+
   results = _.sortBy(results, 'value').reverse();
-  // let points = words.map(word => {
-  //     console.log(i--);
-  //     let term = word.toUpperCase().split('');
-  //     let results = {
-  //         word,
-  //         value: -1
-  //     };
-  //     // console.log(word);
-  //     term.forEach(t => {
-  //         values.forEach(value => {
-  //             if (_.contains(value.letters, t)) {
-  //                 results.value += value.value
-  //                 // console.log(`\t${t}(${value.value}):${results.value}`);
-  //             }
-  //         })
-  //     })
-  //     return results;
-  // });
-  return results;//.find();
+
+  let final = [
+    { words: results.filter(w => w.word.length >= 8), label: '8 letter words', listId: 'eight-list' }
+    , { words: results.filter(w => w.word.length == 7), label: '7 letter words', listId: 'seven-list' }
+    , { words: results.filter(w => w.word.length == 6), label: '6 letter words', listId: 'six-list' }
+    , { words: results.filter(w => w.word.length == 5), label: '5 letter words', listId: 'five-list' }
+    , { words: results.filter(w => w.word.length == 4), label: '4 letter words', listId: 'four-list' }
+    , { words: results.filter(w => w.word.length == 3), label: '3 letter words', listId: 'three-list' }
+    , { words: results.filter(w => w.word.length == 2), label: '2 letter words', listId: 'two-list' }
+  ]
+  return { words: final, total: results.length };
 }
 
 const setTerms = (req) => {
@@ -138,15 +141,20 @@ const setTerms = (req) => {
 routes.forEach(r => {
   app.get(r[0], ((req, res, next) => {
     setTerms(req);
+    let results = getWords('');
     res.render(r[1], {
-      words: getWords('')
+      words: results.words
+      , total: results.total
       , terms
     })
   }))
   app.post(r[0], ((req, res, next) => {
     setTerms(req);
+    let results = getWords('');
     res.render(r[1], {
-      words: getWords()
+      words: results.words
+      , total: results.total
+      , terms
       , terms
     })
   }))
