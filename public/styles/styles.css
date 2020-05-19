@@ -2,15 +2,16 @@ body{
 margin: 0;
 }
 .words {
-  margin: 2em 0 1em 0em;
-  padding: 0 0.2em;
+  margin: 0.4em 0.2em;
+  padding: 0.2em 0.4em;
   display: inline-block!important;
+  background-color: rgba(0,0,0,0.03);
 }
 .letters > letter {
   border-radius: 0.7em;
   border: solid 2px;
   border-color: rgba(39, 39, 39, 0.8);
-  background-color: rgba(222, 177, 0, 0.71);
+  background-color: rgb(222, 177, 0);
   color: black;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   padding: 0.5em 0.8em;
@@ -21,7 +22,14 @@ margin: 0;
 .letters > letter > sub {
   font-family: Arial, Helvetica, sans-serif;
   color: rgba(66, 66, 66, 0.86);
-  position: absolute;
-  bottom: 0.3em;
-  font-size: 0.7em;
+  font-size: 1vw;
+  bottom: -0.75vw;
+  right: -0.75vw;
+}
+.letters .word-value {
+  font-size: 1em;
+  border-radius: 0.5em;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  background: black;
+  color: white;
 }

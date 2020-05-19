@@ -7,8 +7,8 @@ const _ = require('underscore')
 const helpers = require('./helpers')
 const port = 8080;
 
-const values = require('./data/values.json');
-const words = require('./data/dictionary.json');
+const values = require('./public/data/values.json');
+const words = require('./public/data/dictionary.json');
 let terms = {
   search: ''
   , length: -1
@@ -31,26 +31,13 @@ const hbs = exphbs.create({
   partialsDir: __dirname + '/views/partials',
   helpers: helpers()
 })
-
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
 
-// serve static files form /public
-app.use(express.static(path.resolve(__dirname, 'public'))) // serve static files
-const routes = [
-  ['/buttons', 'buttons']
-  , ['/containers', 'containers']
-  , ['/dialogs', 'dialogs']
-  , ['/forms', 'forms']
-  , ['/home', 'home']
-  , ['/indicators', 'indicators']
-  , ['/navs', 'navs']
-  , ['/progress', 'progress']
-  , ['/tables', 'tables']
-  , ['/typography', 'typography']
-  , ['/', 'home']
-];
+// serve static files
+app.use(express.static(path.resolve(__dirname, 'public'))) // serve public files
+app.use(express.static(path.resolve(__dirname, 'data'))) // serve json files
 
 const mapTerm = () => {
   let word = terms.search.toUpperCase();
@@ -58,17 +45,6 @@ const mapTerm = () => {
   let count = _.countBy(current, a => a);
   return { word, count };
 };
-
-const d = [
-  {
-    "word": "AAH",
-    "value": 5,
-    "count": {
-      "A": 2,
-      "H": 1
-    }
-  }
-];
 
 const filterByLetterCount = (results) => {
   let search = mapTerm();
@@ -138,27 +114,36 @@ const setTerms = (req) => {
   });
 }
 
-routes.forEach(r => {
-  app.get(r[0], ((req, res, next) => {
-    setTerms(req);
-    let results = getWords('');
-    res.render(r[1], {
-      words: results.words
-      , total: results.total
-      , terms
-    })
-  }))
-  app.post(r[0], ((req, res, next) => {
-    setTerms(req);
-    let results = getWords('');
-    res.render(r[1], {
-      words: results.words
-      , total: results.total
-      , terms
-      , terms
+helpers().routes.forEach(r => {
+  app.get(`/${r}`, ((req, res, next) => {
+    res.render(r, {
+      layout: 'lux',
     })
   }))
 })
+
+app.get('/', ((req, res, next) => {
+  setTerms(req);
+  let results = getWords('');
+  res.render('home', {
+    layout: 'main',
+    words: results.words
+    , total: results.total
+    , terms
+  })
+}))
+
+app.post('/', ((req, res, next) => {
+  setTerms(req);
+  let results = getWords('');
+  res.render('home', {
+    layout: 'main',
+    words: results.words
+    , total: results.total
+    , terms
+    , terms
+  })
+}))
 
 // Start the server
 const listening = () => {

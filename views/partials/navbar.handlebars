@@ -1,29 +1,19 @@
-    <div class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
-      <div class="container">
-        <a href="../" class="navbar-brand">Word Search</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        {{!-- <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download" aria-expanded="false">Lux <span class="caret"></span></a>
-              <div class="dropdown-menu">
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/buttons">Buttons</a>
-                <a class="dropdown-item" href="/containers">Containers</a>
-                <a class="dropdown-item" href="/dialogs">Dialogs</a>
-                <a class="dropdown-item" href="/forms">Forms</a>
-                <a class="dropdown-item" href="/indicators">Indicators</a>
-                <a class="dropdown-item" href="/navs">Navbars</a>
-                <a class="dropdown-item" href="/progress">Progress</a>
-                <a class="dropdown-item" href="/tables">Tables</a>
-                <a class="dropdown-item" href="/typography">Typography</a>
-              </div>
-            </li>
-          </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">Word Search</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-        </div> --}}
-      </div>
-    </div>
-    <div style="clear: both;">&nbsp;</div>
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/lux"><i class="fa fa-cog"></i></a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="/" method="POST">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<div style="clear: both;">&nbsp;</div>
