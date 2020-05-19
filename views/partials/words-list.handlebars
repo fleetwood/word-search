@@ -1,0 +1,22 @@
+{{#if (isArray words)}}
+
+<div class="card bg-light lg-12">
+    <div class="card-header" data-toggle="collapse" data-target="#{{listId}}" aria-expanded="true"
+        aria-controls="{{listId}}">
+        {{label}} ({{words.length}})
+    </div>
+    <div class="card-body">
+        <div class="collapse show" id="{{listId}}">
+            {{#each words as | word |}}
+            <div class="row col-md-12 words">
+                <span class="letters">
+                    {{{ letterizer word.word word.value }}}
+                    <span class="{{pillBadge word.value}} badge-pill">{{word.value}}</span>
+                </span>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+
+{{/if}}
