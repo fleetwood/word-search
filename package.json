@@ -1,0 +1,45 @@
+{
+  "name": "words",
+  "version": "1.0.0",
+  "description": "A minimal Words search.",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "express",
+    "expressjs",
+    "server",
+    "node",
+    "nodejs",
+    "handlebars",
+    "boilerplate",
+    "template",
+    "templates",
+    "webserver",
+    "css"
+  ],
+  "readmeFilename": "README.md",
+  "author": {
+    "name": "Wethrift",
+    "email": "hello@wethrift.com",
+    "url": "https://www.wethrift.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "browser-sync": "^2.26.7",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "underscore": "^1.10.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:teamwethrift/simple-express-handlebars-boilerplate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/teamwethrift/simple-express-handlebars-boilerplate/issues"
+  },
+  "homepage": "https://wethrift.github.io"
+}

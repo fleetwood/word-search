@@ -1,0 +1,69 @@
+[
+    {
+        "letters": [
+            ""
+        ],
+        "value": 0
+    },
+    {
+        "letters": [
+            "A",
+            "E",
+            "I",
+            "O",
+            "U",
+            "L",
+            "N",
+            "S",
+            "T",
+            "R"
+        ],
+        "value": 1
+    },
+    {
+        "letters": [
+            "D",
+            "G"
+        ],
+        "value": 2
+    },
+    {
+        "letters": [
+            "B",
+            "C",
+            "M",
+            "P"
+        ],
+        "value": 3
+    },
+    {
+        "letters": [
+            "F",
+            "H",
+            "V",
+            "W",
+            "Y"
+        ],
+        "value": 4
+    },
+    {
+        "letters": [
+            "K"
+        ],
+        "value": 5
+    },
+    {
+        "letters": [
+            "J",
+            "X"
+        ],
+        "value": 8
+    },
+    {
+        "letters": [
+            "Q",
+            "Z"
+        ],
+        "value": 10
+    }
+]
