@@ -1,3 +1,4 @@
+require('./utils')
 const express = require('express')
 const bodyParser = require('body-parser')
 const exphbs = require('express-handlebars')
@@ -119,7 +120,9 @@ const getWords = () => {
 
   results = filterByLetterCount(results);
 
-  //TODO: filter for exact matches: "AB"
+  let original = terms.original.toUpperCase();
+  results = results.filter(r => r.word.matchSearch(original,'()'));
+  results = results.filter(r => r.word.containSearch(original,'""'));
 
   results = getValues(results);
 
@@ -139,7 +142,8 @@ const getWords = () => {
 
 const setTerms = (req) => {
   terms = _.extend(terms, {
-    search: req.body.search || ''
+    search: req.body.search.stripSearch() || ''
+    , original: req.body.search || ''
     , points: req.body.points || -1
     , length: req.body.length || -1
   });
@@ -171,7 +175,6 @@ app.post('/', ((req, res, next) => {
     layout: 'main',
     words: results.words
     , total: results.total
-    , terms
     , terms
   })
 }))
