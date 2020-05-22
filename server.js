@@ -5,7 +5,7 @@ const exphbs = require('express-handlebars')
 const browserSync = require('browser-sync')
 const path = require('path')
 const _ = require('underscore')
-const helpers = require('./helpers')
+const helpers = require('./views/scripts/helpers')
 const port = 8080;
 
 const values = require('./public/data/values.json');

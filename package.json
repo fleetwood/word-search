@@ -4,7 +4,8 @@
   "description": "A minimal Words search.",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "build": "npx webpack webpack.config.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -41,5 +42,11 @@
   "bugs": {
     "url": "https://github.com/teamwethrift/simple-express-handlebars-boilerplate/issues"
   },
-  "homepage": "https://wethrift.github.io"
+  "homepage": "https://wethrift.github.io",
+  "devDependencies": {
+    "css-loader": "^3.5.3",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
 }

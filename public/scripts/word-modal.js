@@ -55,7 +55,7 @@
           : '';
     }
 
-    const splitWord = wordValues.map((l, i) => `<letter class="${style(l, i)}">${l.letter}<sub>${l.value || '?'}</sub></letter>`).join('');
+    const splitWord = wordValues.map((l, i) => `<letter>${l.letter}<sub>${l.value || '?'}</sub></letter>`).join('');
     $(".modal-title").html(`${word} (${value} points)`);
     $("#search-term").html(term);
     $("#letterizer").html(splitWord);
