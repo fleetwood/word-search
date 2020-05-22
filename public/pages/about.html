@@ -1,0 +1,40 @@
+  <div class="list-group-item list-group-item-action flex-column align-items-start col-lg-12"></a>
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">?</h5>
+    </div>
+    <p class="mb-1"><b>Used to match any letter anywhere in the word. More than one can be used.</b></p>
+    <p class="mb-1"><b>Ex:</b> <code>ae?</code> matches: <code><u>ATE</u></code>, <code><u>EAT</u></code>. Does not match <code><u>AS</u>K</code>.</p>
+    <p class="mb-1"><b>Ex:</b> <code>a??</code> matches: <code><u>ATE</u></code>. Does not match <code><u>EV</u>E</code>.</p>
+  </div>
+
+  <div class="list-group-item list-group-item-action flex-column align-items-start col-lg-12"></a>
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">"<i>N</i>"</h5>
+    </div>
+    <p class="mb-1"><b>Word must contain the letter(s) in quotes. Strings can be used, and multiples. So you can search for words containing <u>"b"</u> and <u>"a"</u>, but <u>"ba"</u> looks for <code>ba</code> grouped together, not <code>b</code> and <code>a</code> separately. Duplicates are ignored; you can't check for more than one of a letter, unless they're grouped. <u>"ss"</u> will find <code>KISS</code>, but <u>"s"ahp"s"</u> will find both <code>SAP</code> and <code>SASH</code></p>
+    <p class="mb-1"><b>Ex:</b> <code>b"a"dder</code> matches: <code>B<u>A</u>D</code>. Does not match <code>BED</code>.</p>
+    <p class="mb-1"><b>Ex:</b> <code>"b"adde"r"</code> matches: <code><u>B</u>A<u>R</u>D</code>. Does not match <code><u>B</u>EAD</code>.</p>
+    <p class="mb-1"><b>Ex:</b> <code>"br"adde</code> matches: <code><u>BR</u>AD</code>. Does not match <code>BARD</code>.</p>
+  </div>
+
+  <div class="list-group-item list-group-item-action flex-column align-items-start col-lg-12"></a>
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">(<i>N</i>)</h5>
+    </div>
+    <p class="mb-1"><b>Word must contain the letter(s) at that exact location. NOTE: only counts by position from the beginning, not the end. You can't check for words ending with (<i>N</i>)</b></p>
+    <p class="mb-1"><b>Ex:</b> <code>bs(a)tert"</code> matches: <code>BR<u>A</u>T</code>. Does not match <code>BREAST</code>.</p>
+    <p class="mb-1"><b>Ex:</b> <code>bs(at)ert</code> matches: <code>BR<u>AT</u></code>. Does not match <code>BAT</code>.</p>
+    <p class="mb-1"><b>Ex:</b> <code>(b)satert"</code> matches: <code><u>B</u>RAT</code>. Does not match <code>ABET</code>.</p>
+  </div>
+
+
+  <div class="list-group-item list-group-item-action flex-column align-items-start col-lg-12"></a>
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Try some!</h5>
+    </div>
+    <p class="mb-1">Any word containing <u>s</u>: <b><a href='?search=be"s"at'><code>be"s"tat</code></a></b></p>
+    <p class="mb-1">Any word containing <u>es</u>: <b><a href='?search=b"es"at'><code>b"es"tat</code></a></b></p>
+    <p class="mb-1">Any word with <u>b</u> as first letter: <b><a href='?search=(b)esat'><code>(b)estat</code></a></b></p>
+    <p class="mb-1">Any word with <u>b</u> as the third letter: <b><a href='?search=be(s)at'><code>be(s)at</code></a></b></p>
+    <p class="mb-1">Any word with <u>b</u> and <u>a</u>, and with <u>st</u> (grouped) as third and fourth letters: <b><a href='?search="b"e(st)"a"t'><code>"b"e(st)"a"t</code></a></b></p>
+  </div>
