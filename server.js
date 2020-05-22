@@ -14,6 +14,8 @@ let terms = {
   search: ''
   , length: -1
   , points: -1
+  , original: ''
+  , info: ''
 };
 
 const app = express()
@@ -82,7 +84,7 @@ const filterByLetterCount = (results) => {
   let search = mapTerm();
   let start = results.length;
   results = results.filter(dict => compareWords(dict, search));
-  console.log(`Found ${results.length} matches of ${start} words searched`);
+  terms.info = `Found ${results.length} matches from ${start} words searched`;
   return results;
 }
 
@@ -95,13 +97,14 @@ const getValues = (results) => {
     dictLetters.forEach(letter => {
       let index = search.word.indexOf(letter);
       let value = values[letter];
+      dict.original = terms.original;
       if (index > -1) {
         search.word = search.word.slice(0, index) + search.word.slice(index + 1);
         dict.values.push({ letter, value });
         dict.value += value;
       }
       else {
-        dict.values.push({ letter, value: '?' });
+        dict.values.push({ letter, value: '?', style="variable" });
       }
     });
   });
@@ -129,7 +132,7 @@ const getWords = () => {
   results = _.sortBy(results, 'value').reverse();
 
   let final = [
-    { words: results.filter(w => w.word.length >= 8), label: '8 letter words', listId: 'eight-list' }
+    , { words: results.filter(w => w.word.length >= 8), label: '8 letter words', listId: 'eight-list' }
     , { words: results.filter(w => w.word.length == 7), label: '7 letter words', listId: 'seven-list' }
     , { words: results.filter(w => w.word.length == 6), label: '6 letter words', listId: 'six-list' }
     , { words: results.filter(w => w.word.length == 5), label: '5 letter words', listId: 'five-list' }
@@ -140,12 +143,13 @@ const getWords = () => {
   return { words: final, total: results.length };
 }
 
-const setTerms = (req) => {
+const setTerms = (params) => {
+  let search = params.search || '';
   terms = _.extend(terms, {
-    search: req.body.search.stripSearch() || ''
-    , original: req.body.search || ''
-    , points: req.body.points || -1
-    , length: req.body.length || -1
+    search: search.stripSearch() || ''
+    , original: search || ''
+    , points: params.points || -1
+    , length: params.length || -1
   });
 }
 
@@ -153,31 +157,29 @@ helpers().routes.forEach(r => {
   app.get(`/${r}`, ((req, res, next) => {
     res.render(r, {
       layout: 'lux',
+      title: `LUX ${r}`
     })
   }))
 })
 
-app.get('/', ((req, res, next) => {
-  setTerms(req);
-  let results = getWords('');
-  res.render('home', {
-    layout: 'main',
-    words: results.words
-    , total: results.total
-    , terms
-  })
-}))
+const renderHome = (props) => {
+  setTerms(props);
+  let words = getWords('');
+  let title = 'Word Search';
+  if (terms.search != '') {
+    title += ` (${terms.search} : ${words.total} found!)`;
+    terms.info += ` (Filtered to ${words.total} total results)`
+  }
+  let results =  _.extend({
+      layout: 'main',
+      title
+    },_.extend(terms, words)
+  );
+  return results;
+};
 
-app.post('/', ((req, res, next) => {
-  setTerms(req);
-  let results = getWords('');
-  res.render('home', {
-    layout: 'main',
-    words: results.words
-    , total: results.total
-    , terms
-  })
-}))
+app.get('/', (req, res, next) => res.render('home', renderHome(req.query)));
+app.post('/', (req, res, next) => res.render('home', renderHome(req.body)));
 
 // Start the server
 const listening = () => {

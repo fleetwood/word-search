@@ -9,8 +9,8 @@ margin: 0;
 }
 .letters > letter {
   border-radius: 0.7em;
-  border: solid 2px;
-  border-color: rgba(39, 39, 39, 0.8);
+  border: solid 3px;
+  border-color: rgba(0,0,0, 0.8);
   background-color: rgb(222, 177, 0);
   color: black;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -33,8 +33,41 @@ margin: 0;
   background: black;
   color: white;
 }
-letter.variable {
-  background-color: rgb(115, 204, 218);
+letter.variable, letter.search, letter.match {
   font-style: italic;
-  color: rgb(88, 109, 111);
+  border-color: black;
+}
+letter.variable {
+  background-color: #999;
+}
+letter.search {
+  background-color: #d28080;
+}
+letter.match {
+  background-color: #7ca6e8;
+}
+
+#faq {
+  cursor: pointer;
+  opacity: 0.9;
+}
+#faq:hover {
+  opacity: 1;
+}
+u {
+text-decoration: underline;
+  font-weight: bold;
+}
+code > u {
+  color: #e83ee5;
+}
+.accord {
+  cursor: pointer;
+}
+.accord::before {
+  font: normal normal normal 14px/1 FontAwesome;
+  content: '\f0d8';
+}
+.accord.collapsed::before {
+  content: '\f0d7';
 }

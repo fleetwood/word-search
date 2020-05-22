@@ -1,8 +1,11 @@
 <form method="POST" action="/">
   <div class="form-group row">
     <div class="input-group col-lg-12">
+      <div class="input-group-prepend" id="faq">
+        <span class="input-group-text"><i class="fa fa-question"></i></span>
+      </div>
       <input class="form-control form-control-lg" type="text" placeholder="Search for..." name="search" id="search"
-        value="{{terms.original}}">
+        value="{{original}}">
     </div>
     <div class="col-lg-12">
       <div class="form-group col-lg-6">
@@ -37,6 +40,7 @@
   <div class="row">
     <div class="col-lg-12">
       <h3>Words {{ total total }}</h3>
+      <small>{{info}}</small>
     </div>
   </div>
   <div class="row">
@@ -47,3 +51,21 @@
     </div>
   </div>
 </div>
+
+<script>
+  (function () {
+
+  $('body').on('click', '#faq', function (e) {
+    e.preventDefault();
+    $.ajax({
+      url: '/pages/about.html'
+    })
+    .done(res => {
+        $(".modal-title").html(`How to use search parameters`);
+        $("#letterizer").html(res);
+        $("#word-modal").modal();
+    });
+  });
+
+})();
+</script>

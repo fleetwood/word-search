@@ -11,7 +11,11 @@ const getRequires = (search, open, close) => {
         let r = search[i];
         if (!active && r == open) {
             active = true;
-            seek.index = i;
+            let s = 0;
+            requires.forEach(v => {
+                return s+= (1 + v.val.length)
+            })
+            seek.index = i - s;
         }
         else if (active && r == close) {
             active = false;
@@ -25,7 +29,6 @@ const getRequires = (search, open, close) => {
             seek.val += r;
         }
     }
-    console.log(`Requires: ${JSON.stringify(requires)}`);
     return requires;
 }
 
@@ -58,6 +61,10 @@ Object.defineProperty(String.prototype, 'containSearch', {
 
 Object.defineProperty(String.prototype, 'matchSearch', {
     value(search, terms) {
+        let exp = new RegExp(/([\"\*])+/);
+        while (exp.test(search)) {
+            search = search.replace(exp, '');
+        }
         terms = terms.split('')
         let open = terms[0]
         , close = terms[1];

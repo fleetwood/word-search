@@ -6,8 +6,19 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       </div>
       <div class="modal-body">
-        <div id="letterizer" class="row col-md-12 letters">
+        <h5>Searched for <code id="search-term"></code></h5>
+        <div class="row col-md-12">
+          <div class="row col-md-12">
+            <small><b>?</b> tiles highighted in <span style="color:#999">gray</span>.</small><br />
+          </div>
+          <div class="row col-md-12">
+            <small><b>(*)</b> matches highighted in <span style="color:#7ca6e8">blue</span>.</small><br />
+          </div>
+          <div class="row col-md-12">
+            <small><b>"*"</b> matches highighted in <span style="color:#d28080">pink</span>.</small>
+          </div>
         </div>
+        <div id="letterizer" class="row col-md-12 letters"></div>
       </div>
     </div>
   </div>
