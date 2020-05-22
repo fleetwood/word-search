@@ -104,7 +104,7 @@ const getValues = (results) => {
         dict.value += value;
       }
       else {
-        dict.values.push({ letter, value: '?', style="variable" });
+        dict.values.push({ letter, value: '?', style:"variable" });
       }
     });
   });
