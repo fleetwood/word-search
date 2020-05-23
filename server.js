@@ -2,6 +2,7 @@ require('./utils');
 const ENV = process.env.ENV || null;
 const PORT = process.env.PORT || 8080;
 const HOST = process.env.HOST || 'localhost';
+const isDev = ENV === 'development';
 
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -156,14 +157,16 @@ const setTerms = (params) => {
   });
 }
 
-helpers().routes.forEach(r => {
-  app.get(`/${r}`, ((req, res, next) => {
-    res.render(r, {
-      layout: 'lux',
-      title: `LUX ${r}`
-    })
-  }))
-})
+if (isDev) {
+  helpers().routes.forEach(r => {
+    app.get(`/${r}`, ((req, res, next) => {
+      res.render(r, {
+        layout: 'lux',
+        title: `LUX ${r}`
+      })
+    }))
+  })
+}
 
 const renderHome = (props) => {
   setTerms(props);
@@ -175,7 +178,8 @@ const renderHome = (props) => {
   }
   let results = _.extend({
     layout: 'main',
-    title
+    title,
+    isDev
   }, _.extend(terms, words)
   );
   return results;
@@ -207,7 +211,7 @@ const devServer = () => {
 }
 
 app.listen(PORT,
-  ENV && ENV === 'development'
+  isDev
     ? devServer
     : console.log('Running in production mode')
 );
