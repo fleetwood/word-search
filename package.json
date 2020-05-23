@@ -37,14 +37,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:teamwethrift/simple-express-handlebars-boilerplate.git"
+    "url": "git@github.com:fleetwood/word-search.git"
   },
-  "bugs": {
-    "url": "https://github.com/teamwethrift/simple-express-handlebars-boilerplate/issues"
-  },
-  "homepage": "https://wethrift.github.io",
   "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.5.3",
+    "handlebars-loader": "^1.7.1",
+    "html-webpack-plugin": "^4.3.0",
+    "raw-loader": "^4.0.1",
     "style-loader": "^1.2.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"

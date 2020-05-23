@@ -1,31 +1,22 @@
-# simple-express-handlebars-boilerplate
-A minimal, web server boilerplate in NodeJS using [ExpressJS](https://expressjs.com/) and [express-handlebars](https://github.com/ericf/express-handlebars).
+# word-search
+A word search app that polls a library of 300K words, allowing for dynamic conditions.
 
-- Serve static files from `/public`
-- Use vanilla CSS `public/styles/styles.css`
-- Simple `.handlebars` templates and partials from `/views` and `/views/partials`
-- Create custom helpers in `helpers.js`
+#### Limit length
+`nnnn` Word consists of four letter or less. **TPRA** *Matches*: **PART**, **RAP** *Not*: PARTY
 
-## No build required
-1. Install Node/NPM
-2. Clone this repository
-3. Install packages - `npm install`
-4. Start the server - `npm start`
+#### Variable search
+`nnn?nnn` Matches any character. **?AY** *Matches*: **P**AY, AY**E**, *Not*: SOY.
 
-When running locally, the server will start on `http://localhost:3000/`
+#### Required pattern search
+`nn"s"nn` Word must contain the letter _S_ anywhere in the string. *Matches*: **S**IT, PA**S**T, *Not*: PIT, PAT
 
-## Example deployments
-We've used this boilerplate as the starting point for components of [Wethrift](https://www.wethrift.com) and [Searchmy.bio](https://www.searchmy.bio).
+`nn"say"nn` Word must contain the pattern _SAY_ anywhere in the string. *Matches*: SOOTH**SAY**ER, *Not*: SOOTHES
 
-## Deploy to Heroku
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/teamwethrift/simple-express-handlebars-boilerplate)
+#### Required pattern by index
+`nn(s)nnn` Word must contain the letter _S_ in the third position. *Matches*: PA**S**TURE, PA**S**TY, *Not*: PARSE, START
 
-Deploy [simple-express-handlebars-boilerplate](https://elements.heroku.com/buttons/teamwethrift/simple-express-handlebars-boilerplate) to Heroku with one click from the Heroku Elements Marketplace.
+`nn(say)nn` Word must contain the pattern _SAY_ in the third position. *Matches*: ES**SAY**AY, RE**SAY**, *Not*: SAYER
 
-Alternatively, install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli), clone this repo and [create a new app](https://devcenter.heroku.com/articles/creating-apps).
 
-## More from Wethrift
-- [Wethrift development resources and links](http://wethrift.github.io)
-- [Wethrift Atom snippets](https://atom.io/packages/wethrift-snippets)
-- [Wethrift on Codepen](https://codepen.io/wethrift/)
-- [Wethrift on NPM](https://www.npmjs.com/~teamwethrift)
+## Deploy
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/fleetwood/word-search)

@@ -100,13 +100,22 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
+                test: path.resolve(__dirname, 'views/**') + /\.css$/,
                 use: [
                     'style-loader',
                     'css-loader',
                 ],
             },
+            {
+                test: /\.handlebars$/,
+                loader: "handlebars-loader"
+            },
+            {
+                test: /\.txt$/i,
+                use: 'raw-loader',
+            }
         ],
+
     }
 };
 /* WEBPACK VAR INJECTION */}.call(this, "/"))
