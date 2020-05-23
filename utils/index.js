@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const getRequires = (search, open, close) => {
     let active = false;
     let base = {

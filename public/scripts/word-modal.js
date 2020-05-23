@@ -46,13 +46,16 @@
     searches(term, word, wordValues);
 
     let style = (letter, index) => {
-      let match = matches(term);
-      return letter.style ||
-        match.filter(m => index >= m.start && index < m.end).length > 0
-        ? 'match'
-        : letter.value == '?'
-          ? 'variable'
-          : '';
+      return letter.value == '?'
+      ? 'variable'
+      : '';
+      // let match = matches(term);
+      // return letter.style ||
+      //   match.filter(m => index >= m.start && index < m.end).length > 0
+      //   ? 'match'
+      //   : letter.value == '?'
+      //     ? 'variable'
+      //     : '';
     }
 
     const splitWord = wordValues.map((l, i) => `<letter class="${style(l, i)}">${l.letter}<sub>${l.value || '?'}</sub></letter>`).join('');
