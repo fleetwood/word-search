@@ -1,5 +1,8 @@
 require('./utils');
-const ENV = process.env && process.env.ENV || null;
+const ENV = process.env.ENV || null;
+const PORT = process.env.PORT || 8080;
+const HOST = process.env.HOST || 'localhost';
+
 const express = require('express')
 const bodyParser = require('body-parser')
 const exphbs = require('express-handlebars')
@@ -7,7 +10,6 @@ const browserSync = require('browser-sync')
 const path = require('path')
 const _ = require('underscore')
 const helpers = require('./views/scripts/helpers')
-const port = 8080;
 
 const values = require('./public/data/values.json');
 const words = require('./public/data/dictionary.json');
@@ -196,15 +198,15 @@ const devServer = () => {
     ],
     online: false,
     open: false,
-    port: Number(port) + 1,
-    proxy: `localhost:${port}`,
+    port: Number(PORT) + 1,
+    proxy: `${HOST}:${PORT}`,
     ui: {
-      port: Number(port) + 2
+      port: Number(PORT) + 2
     }
   });
 }
 
-app.listen(port,
+app.listen(PORT,
   ENV && ENV === 'development'
     ? devServer
     : console.log('Running in production mode')
