@@ -1,11 +1,12 @@
-require('./utils')
+require('./utils');
+const ENV = process.env && process.env.ENV || null;
 const express = require('express')
 const bodyParser = require('body-parser')
 const exphbs = require('express-handlebars')
 const browserSync = require('browser-sync')
 const path = require('path')
 const _ = require('underscore')
-const helpers = require('./helpers')
+const helpers = require('./views/scripts/helpers')
 const port = 8080;
 
 const values = require('./public/data/values.json');
@@ -104,7 +105,7 @@ const getValues = (results) => {
         dict.value += value;
       }
       else {
-        dict.values.push({ letter, value: '?', style:"variable" });
+        dict.values.push({ letter, value: '?', style: "variable" });
       }
     });
   });
@@ -124,8 +125,8 @@ const getWords = () => {
   results = filterByLetterCount(results);
 
   let original = terms.original.toUpperCase();
-  results = results.filter(r => r.word.matchSearch(original,'()'));
-  results = results.filter(r => r.word.containSearch(original,'""'));
+  results = results.filter(r => r.word.matchSearch(original, '()'));
+  results = results.filter(r => r.word.containSearch(original, '""'));
 
   results = getValues(results);
 
@@ -170,10 +171,10 @@ const renderHome = (props) => {
     title += ` (${terms.search} : ${words.total} found!)`;
     terms.info += ` (Filtered to ${words.total} total results)`
   }
-  let results =  _.extend({
-      layout: 'main',
-      title
-    },_.extend(terms, words)
+  let results = _.extend({
+    layout: 'main',
+    title
+  }, _.extend(terms, words)
   );
   return results;
 };
@@ -182,8 +183,8 @@ app.get('/', (req, res, next) => res.render('home', renderHome(req.query)));
 app.post('/', (req, res, next) => res.render('home', renderHome(req.body)));
 
 // Start the server
-const listening = () => {
-
+const devServer = () => {
+  console.log('Starting browserSync....');
   browserSync({
     files: [
       'public/**/*.{html,js,css}',
@@ -203,4 +204,8 @@ const listening = () => {
   });
 }
 
-app.listen(port, listening);
+app.listen(port,
+  ENV && ENV === 'development'
+    ? devServer
+    : console.log('Running in production mode')
+);
