@@ -1,37 +1,40 @@
 <form method="POST" action="/">
   <div class="form-group row">
-    <div class="input-group col-lg-12">
+    <div class="input-group col-lg-8">
       <div class="input-group-prepend" id="faq">
         <span class="input-group-text"><i class="fa fa-question"></i></span>
       </div>
       <input class="form-control form-control-lg" type="text" placeholder="Search for..." name="search" id="search"
         value="{{original}}">
+      <div class="input-group-append">
+        <button class="input-group-text" type="submit"><i class="fa fa-search"></i>&nbsp;Search</span>
+      </div>
     </div>
-    <div class="col-lg-12">
-      <div class="form-group col-lg-6">
-        <label for="length">Min length</label>
-        <select class="form-control" onchange="this.form.submit()" id="length" name="length">
-          <option {{select 0 terms.length}}>0</option>
-          <option {{select 1 terms.length}}>1</option>
-          <option {{select 2 terms.length}}>2</option>
-          <option {{select 3 terms.length}}>3</option>
-          <option {{select 4 terms.length}}>4</option>
-          <option {{select 5 terms.length}}>5</option>
-          <option {{select 6 terms.length}}>6</option>
-          <option {{select 7 terms.length}}>7</option>
-          <option {{select 8 terms.length}}>8</option>
-        </select>
-      </div>
-      <div class="form-group col-lg-6">
-        <label for="length">Min points</label>
-        <select class="form-control" onchange="this.form.submit()" id="points" name="points">
-          <option {{select 0 terms.points}}>0</option>
-          <option {{select 5 terms.points}}>5</option>
-          <option {{select 10 terms.points}}>10</option>
-          <option {{select 15 terms.points}}>15</option>
-          <option {{select 20 terms.points}}>20</option>
-        </select>
-      </div>
+  </div>
+  <div class="form-group row col-lg-6">
+    <div class="form-group col-lg-3">
+      <label for="length">Min length</label>
+      <select class="form-control" onchange="this.form.submit()" id="length" name="length">
+        <option {{select 0 terms.length}}>0</option>
+        <option {{select 1 terms.length}}>1</option>
+        <option {{select 2 terms.length}}>2</option>
+        <option {{select 3 terms.length}}>3</option>
+        <option {{select 4 terms.length}}>4</option>
+        <option {{select 5 terms.length}}>5</option>
+        <option {{select 6 terms.length}}>6</option>
+        <option {{select 7 terms.length}}>7</option>
+        <option {{select 8 terms.length}}>8</option>
+      </select>
+    </div>
+    <div class="form-group col-lg-3">
+      <label for="length">Min points</label>
+      <select class="form-control" onchange="this.form.submit()" id="points" name="points">
+        <option {{select 0 terms.points}}>0</option>
+        <option {{select 5 terms.points}}>5</option>
+        <option {{select 10 terms.points}}>10</option>
+        <option {{select 15 terms.points}}>15</option>
+        <option {{select 20 terms.points}}>20</option>
+      </select>
     </div>
   </div>
 </form>
@@ -45,9 +48,9 @@
   </div>
   <div class="row">
     <div class="col-lg-12 list-group">
-        {{#each words as |list|}}
-          {{> words-list list }}
-        {{/each}}
+      {{#each words as |list|}}
+      {{> words-list list }}
+      {{/each}}
     </div>
   </div>
 </div>
@@ -55,17 +58,17 @@
 <script>
   (function () {
 
-  $('body').on('click', '#faq', function (e) {
-    e.preventDefault();
-    $.ajax({
-      url: '/pages/about.html'
-    })
-    .done(res => {
-        $(".modal-title").html(`How to use search parameters`);
-        $("#letterizer").html(res);
-        $("#word-modal").modal();
+    $('body').on('click', '#faq', function (e) {
+      e.preventDefault();
+      $.ajax({
+        url: '/pages/about.html'
+      })
+        .done(res => {
+          $(".modal-title").html(`How to use search parameters`);
+          $("#letterizer").html(res);
+          $("#word-modal").modal();
+        });
     });
-  });
 
-})();
+  })();
 </script>
