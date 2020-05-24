@@ -66,9 +66,9 @@ code > u {
   cursor: pointer;
 }
 .accord::before {
-  font: normal normal normal 14px/1 FontAwesome;
-  content: '\f0d8';
+  font: normal normal normal 3rem/1 FontAwesome;
+  content: '\f102';
 }
 .accord.collapsed::before {
-  content: '\f0d7';
+  content: '\f103';
 }

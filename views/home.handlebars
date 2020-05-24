@@ -41,8 +41,17 @@
 
 <div class="bs-docs-section">
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-9">
       <h3>Words {{ total total }}</h3>
+    </div>
+      {{#if (isArray words) }}
+      <div class="col-3">
+        <button data-toggle="collapse" data-target=".collapse"  class="float-right btn btn-primary collapse-all">Collapse All</button>
+      </div>
+      {{/if}}
+  </div>
+  <div class="row">
+    <div class="col-12">
       <small>{{info}}</small>
     </div>
   </div>
@@ -68,6 +77,21 @@
           $("#letterizer").html(res);
           $("#word-modal").modal();
         });
+    });
+
+    $('body').on('click', '.collapse-all', function (e) {
+      e.preventDefault();
+
+      $(this).toggleClass('show');
+      var show = $(this).hasClass('show');
+      if (show) {
+        $(this).html('Show All');
+        // $('.collapse').removeClass('show');
+      }
+      else {
+        $(this).html('Collapse All');
+        // $('.collapse').addClass('show');
+      }
     });
 
   })();
