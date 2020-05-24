@@ -1,16 +1,17 @@
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="#">Word Search</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
-    {{#if isDev}}
+      {{#if isDev}}
       <li class="nav-item">
         <a class="nav-link" href="/lux"><i class="fa fa-cog"></i></a>
       </li>
-    {{/if}}
+      {{/if}}
     </ul>
     <form class="form-inline my-2 my-lg-0" action="/" method="POST">
       <input class="form-control mr-sm-2" type="text" id="search" name="search" placeholder="Search">
