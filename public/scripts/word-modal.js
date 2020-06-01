@@ -35,6 +35,12 @@
     }
   };
 
+  $('body').on('click', '#clearSearch', function(e) {
+    e.preventDefault();
+
+    $('input:text').val('');
+  });
+
   $('body').on('click', '.words', function (e) {
     e.preventDefault();
 
