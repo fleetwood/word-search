@@ -14,28 +14,28 @@
   }
 
   let searches = (term, word, values) => {
-    term = term.replace(/[\(\)]/g,''); // get rid of ()
+    term = term.replace(/[\(\)]/g, ''); // get rid of ()
     let search = [...term.matchAll(/\"(.*?)\"/g)]
       .map((m, i) => {
         m.start = m.index - (i * 2);
         m.end = m.start + m[1].length;
         return m;
-    });
-  
-    for(var s = 0; s < search.length; s++) {
+      });
+
+    for (var s = 0; s < search.length; s++) {
       let current = search[s];
       if (!current) {
         break;
       }
       console.log(`Searching through ${word} to find ${current[1]}`);
-      word = word.slice(0,current.start) + word.slice(current.end);
-      for(let v = current.start; v < current.end; v++) {
+      word = word.slice(0, current.start) + word.slice(current.end);
+      for (let v = current.start; v < current.end; v++) {
         values[v].style = 'search';
       }
     }
   };
 
-  $('body').on('click', '#clearSearch', function(e) {
+  $('body').on('click', '#clearSearch', function (e) {
     e.preventDefault();
 
     $('input:text').val('');
@@ -53,8 +53,8 @@
 
     let style = (letter, index) => {
       return letter.value == '?'
-      ? 'variable'
-      : '';
+        ? 'variable'
+        : '';
       // let match = matches(term);
       // return letter.style ||
       //   match.filter(m => index >= m.start && index < m.end).length > 0

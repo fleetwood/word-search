@@ -3,9 +3,9 @@ require('dotenv').config();
 const getRequires = (search, open, close) => {
     let active = false;
     let base = {
-            index: -1,
-            val: ''
-        }
+        index: -1,
+        val: ''
+    }
         , seek = base;
     let requires = [];
 
@@ -15,7 +15,7 @@ const getRequires = (search, open, close) => {
             active = true;
             let s = 0;
             requires.forEach(v => {
-                return s+= (1 + v.val.length)
+                return s += (1 + v.val.length)
             })
             seek.index = i - s;
         }
@@ -49,15 +49,28 @@ Object.defineProperty(String.prototype, 'containSearch', {
     value(search, terms) {
         terms = terms.split('')
         let open = terms[0]
-        , close = terms[1];
+            , close = terms[1];
         let requires = getRequires(search, open, close);
         let results = true;
         requires.forEach(r => {
-            if (this.indexOf(r.val) <0 ) {
+            if (this.indexOf(r.val) < 0) {
                 results = false;
             }
         });
         return results;
+    }
+})
+
+Object.defineProperty(String.prototype, 'endsWith', {
+    value(search, term) {
+        return ((search.indexOf(term) < 0) ||
+                (this
+                    .split('')
+                    .reverse()
+                    .join('')
+                    .indexOf(
+                        search.split('')[search.indexOf(term) + 1]
+                    ) === 0));
     }
 })
 
@@ -69,10 +82,10 @@ Object.defineProperty(String.prototype, 'matchSearch', {
         }
         terms = terms.split('')
         let open = terms[0]
-        , close = terms[1];
+            , close = terms[1];
         let requires = getRequires(search, open, close);
         let results = true;
-        
+
         requires.forEach(r => {
             if (this.indexOf(r.val) != r.index) {
                 results = false;

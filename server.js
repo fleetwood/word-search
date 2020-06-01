@@ -92,6 +92,19 @@ const filterByLetterCount = (results) => {
   return results;
 }
 
+const getEndsWith = (results) => {
+  if (original.indexOf('+') > -1) {
+    let at = original.split('')[original.indexOf('+') + 1];
+    results = results.filter(f => f.word
+      .split('')
+      .reverse()
+      .join('')
+      .indexOf(at) === 0
+    );
+  }
+  return results;
+}
+
 const getValues = (results) => {
   results.forEach(dict => {
     dict.value = 0;
@@ -130,6 +143,7 @@ const getWords = () => {
   let original = terms.original.toUpperCase();
   results = results.filter(r => r.word.matchSearch(original, '()'));
   results = results.filter(r => r.word.containSearch(original, '""'));
+  results = results.filter(r => r.word.endsWith(original, '+'));
 
   results = getValues(results);
 

@@ -1,16 +1,16 @@
-<form method="POST" action="/">
+<form id="searchForm" name="searchForm" method="POST" action="/">
   <div class="form-group row">
     <div class="input-group col-sm-12">
-      <div class="input-group-prepend col-xs-2" id="faq">
+      <div class="button input-group-prepend col-xs-2" id="faq">
         <span class="input-group-text"><i class="fa fa-question"></i></span>
       </div>
-      <div class="input-group-prepend  col-xs-1">
-        <button class="input-group-text" id="clearSearch" name="clearSearch"><i class="fa fa-eraser"></i></span>
+      <div class="button input-group-prepend col-xs-1">
+        <span class="input-group-text" id="clearSearch" name="clearSearch"><i class="fa fa-eraser"></i></span>
       </div>
       <input class="form-control form-control-lg col-xs-4" type="text" placeholder="Search for..." name="search" id="search"
         value="{{original}}">
       <div class="input-group-append col-xs-2">
-        <button class="input-group-text" type="submit"><i class="fa fa-search"></i>&nbsp;Search</span>
+        <button class="input-group-text" type="submit"><i class="fa fa-search"></i>&nbsp;Search</span></button>
       </div>
     </div>
   </div>
