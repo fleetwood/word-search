@@ -48,11 +48,11 @@ letter.match {
   background-color: #7ca6e8;
 }
 
-#faq {
+.button {
   cursor: pointer;
-  opacity: 0.9;
+  opacity: 0.8;
 }
-#faq:hover {
+.button:hover {
   opacity: 1;
 }
 u {
