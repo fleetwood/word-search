@@ -130,6 +130,7 @@ const getWords = () => {
   let original = terms.original.toUpperCase();
   results = results.filter(r => r.word.matchSearch(original, '()'));
   results = results.filter(r => r.word.containSearch(original, '""'));
+  results = results.filter(r => r.word.endsWith(original, '+'));
 
   results = getValues(results);
 
